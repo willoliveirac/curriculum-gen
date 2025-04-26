@@ -32,8 +32,8 @@ Este app foi desenvolvido utilizando **Electron** e **Node.js** para permitir a 
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seuusuario/gerador-curriculos.git
-cd gerador-curriculos
+git clone https://github.com/willoliveirac/curriculum-gen.git
+cd curriculum-gen
 ```
 
 Instale as dependências:
