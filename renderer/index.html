@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Currículo</title>
+    <script src="../libs/tailwind.js"></script>
+  </head>
+  <body class="bg-gray-50 p-6 font-sans">
+    <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">
+      Gerador de Currículo
+    </h1>
+
+    <form
+      id="formulario"
+      class="space-y-8 bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto"
+    >
+      <!-- Informações Pessoais -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Informações Pessoais
+        </legend>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <input
+            name="nome"
+            placeholder="Nome"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <input
+            name="cidade"
+            placeholder="Cidade"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="estadoCivil"
+            placeholder="Estado Civil"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="idade"
+            placeholder="Idade"
+            type="number"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="cnh"
+            placeholder="CNH"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="endereco"
+            placeholder="Endereço"
+            class="input p-4 col-span-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            id="telefone"
+            name="telefone"
+            type="text"
+            placeholder="Telefone (whatsapp)"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            id="contatoTelefone"
+            name="contatoTelefone"
+            placeholder="Telefone do Contato"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="contatoNome"
+            placeholder="Nome do Contato"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="email"
+            placeholder="Email"
+            type="email"
+            class="input p-4 col-span-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </fieldset>
+
+      <!-- Objetivo -->
+      <fieldset class="w-full border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">Objetivo</legend>
+        <textarea
+          name="objetivo"
+          placeholder="Objetivo Profissional"
+          class="input p-4 h-32 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+      </fieldset>
+
+      <!-- Habilidades -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Habilidades
+        </legend>
+        <div id="habilidadesContainer" class="space-y-4 mt-4"></div>
+        <button
+          type="button"
+          onclick="adicionarHabilidade()"
+          class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          + Adicionar Habilidade
+        </button>
+      </fieldset>
+
+      <!-- Formação Escolar -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Formação Escolar
+        </legend>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <input
+            name="formacao.nivel"
+            placeholder="Nível de Escolaridade"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="formacao.instituicao"
+            placeholder="Instituição"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            name="formacao.ano"
+            placeholder="Ano de Conclusão"
+            class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </fieldset>
+
+      <!-- Experiência Profissional -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Experiência Profissional
+        </legend>
+        <div id="experienciasContainer" class="space-y-4 mt-4"></div>
+        <button
+          type="button"
+          onclick="adicionarExperiencia()"
+          class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          + Adicionar Experiência
+        </button>
+      </fieldset>
+
+      <!-- Cursos -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Qualificação Profissional (Cursos)
+        </legend>
+        <div id="cursosContainer" class="space-y-4 mt-4"></div>
+        <button
+          type="button"
+          onclick="adicionarCurso()"
+          class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          + Adicionar Curso
+        </button>
+      </fieldset>
+
+      <!-- Informações Adicionais -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">
+          Informações Adicionais
+        </legend>
+        <div id="adicionaisContainer" class="space-y-4 mt-4"></div>
+        <button
+          type="button"
+          onclick="adicionarInformacaoAdicional()"
+          class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          + Adicionar Informação
+        </button>
+      </fieldset>
+
+      <!-- Idioma -->
+      <fieldset class="border border-gray-300 p-6 rounded-md bg-gray-50">
+        <legend class="text-2xl font-semibold text-gray-700">Idioma</legend>
+        <input
+          name="idioma"
+          placeholder="Idioma (Ex: Inglês)"
+          class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          name="nivelIdioma"
+          placeholder="Nível (Ex: Intermediário)"
+          class="input mt-4 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </fieldset>
+
+      <!-- Ano -->
+      <input
+        name="ano"
+        placeholder="Ano Atual (Ex: 2025)"
+        class="input p-4 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+
+      <div class="max-w-3xl mx-auto mt-6">
+        <iframe
+          id="preview"
+          class="w-full h-[600px] border border-gray-300 rounded-md bg-white"
+        ></iframe>
+      </div>
+
+      <!-- Botão Gerar -->
+      <div>
+        <button
+          type="submit"
+          class="w-full mt-6 py-3 bg-green-600 text-white text-lg rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        >
+          Gerar Currículo
+        </button>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          id="btnImprimir"
+          class="w-full mt-3 py-3 bg-red-600 text-white text-lg rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
+          Imprimir Currículo (PDF)
+        </button>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          id="btnLimpar"
+          class="w-full mt-3 py-3 bg-gray-600 text-white text-lg rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          Limpar Formulário
+        </button>
+      </div>
+    </form>
+
+    <script id="curriculo-template" type="text/x-handlebars-template">
+      <div class="p-8 bg-white rounded-md">
+        {{#if nome}}
+          <h1 class="text-4xl font-bold mb-2">{{nome}}</h1>
+        {{/if}}
+        {{! repita os #if que passamos pra cada campo... }}
+        <!-- Por exemplo: -->
+        {{#if email}}
+          <p class="text-gray-700 mb-4">Email: {{email}}</p>
+        {{/if}}
+        <!-- E todas as outras seções da forma que combinamos -->
+      </div>
+    </script>
+
+    <!-- Definição dos blocos dinâmicos -->
+    <script>
+      function adicionarHabilidade() {
+        const container = document.getElementById("habilidadesContainer");
+        const div = document.createElement("div");
+        div.className = "flex gap-2 mt-2";
+        div.innerHTML = `
+          <input name="habilidade" placeholder="Ex: HTML" class="w-full input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <button type="button" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(div);
+        div.querySelector("input[name='habilidade']").focus();
+      }
+
+      function adicionarExperiencia() {
+        const container = document.getElementById("experienciasContainer");
+        const div = document.createElement("div");
+        div.className =
+          "experiencia-item border p-4 rounded-md bg-gray-100 space-y-2";
+        div.innerHTML = `
+          <input name="empresa" placeholder="Empresa" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="local" placeholder="Local" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="periodo" placeholder="Período" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="cargo" placeholder="Cargo" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <textarea name="descricao" placeholder="Atribuições" class="w-full input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <button type="button" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="this.parentElement.remove()">✕ Remover</button>
+        `;
+        container.appendChild(div);
+        div.querySelector("input[name='empresa']").focus();
+      }
+
+      function adicionarCurso() {
+        const container = document.getElementById("cursosContainer");
+        const div = document.createElement("div");
+        div.className =
+          "curso-item border p-4 rounded-md bg-gray-100 space-y-2";
+        div.innerHTML = `
+          <input name="titulo" placeholder="Título do Curso" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          
+          <input name="cargaHoraria" placeholder="Carga Horária" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="instituicao" placeholder="Instituição" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          
+          <input name="conclusao" placeholder="Conclusão" class="input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <textarea name="conteudo" placeholder="Conteúdo" class="w-full input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <button type="button" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="this.parentElement.remove()">✕ Remover</button>
+        `;
+        container.appendChild(div);
+        div.querySelector("input[name='titulo']").focus();
+      }
+
+      function adicionarInformacaoAdicional() {
+        const container = document.getElementById("adicionaisContainer");
+        const div = document.createElement("div");
+        div.className = "flex gap-2 mt-2";
+        div.innerHTML = `
+          <input name="adicional" placeholder="Ex: Disponibilidade" class="w-full  input p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <button type="button" class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="this.parentElement.remove()">✕</button>
+        `;
+        container.appendChild(div);
+        div.querySelector("input[name='adicional']").focus();
+      }
+    </script>
+
+    <!-- Scripts finais -->
+
+    <script src="../libs/inputmask.min.js"></script>
+    <script src="./renderer.js"></script>
+  </body>
+</html>

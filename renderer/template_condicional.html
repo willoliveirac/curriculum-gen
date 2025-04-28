@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{#if nome}}{{nome}}{{/if}} - Currículo</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="../libs/tailwind.js"></script>
+  </head>
+  <body class="bg-white p-10 font-sans text-gray-800">
+    <div class="max-w-3xl mx-auto space-y-6">
+      <div class="flex items-center justify-between w-full h-10">
+        <!-- Triângulo da esquerda -->
+        <div
+          class="w-1/2 h-full bg-gradient-to-r from-blue-500 to-blue-900"
+          style="clip-path: polygon(0 0, 100% 50%, 0 100%)"
+        ></div>
+
+        <!-- Triângulo da direita -->
+        <div
+          class="w-1/2 h-full bg-gradient-to-l from-blue-500 to-blue-900"
+          style="clip-path: polygon(100% 0, 0 50%, 100% 100%)"
+        ></div>
+      </div>
+      <header
+        class="text-center space-y-1 clip-path: polygon(0 71%, 0% 100%, 100% 100%);"
+      >
+        <h1 class="text-4xl font-bold">{{#if nome}}{{nome}}{{/if}}</h1>
+        <p class="text-sm">
+          Brasileiro(a), natural de {{#if cidade}}{{cidade}}{{/if}}, {{#if estadoCivil}}, {{estadoCivil}}{{/if}}, {{#if idade}}, {{idade}} anos{{/if}} anos,
+          CNH {{#if cnh}}, CNH {{cnh}}{{/if}}
+        </p>
+        <p class="text-sm">{{#if endereco}}<p class="text-sm">{{endereco}}</p>{{/if}}</p>
+        <p class="text-sm">
+          Telefone: {{#if telefone}}Telefone: {{telefone}} (whatsapp){{/if}} • Contato: {{contatoNome}}
+          ({{contatoTelefone}})
+        </p>
+        <p class="text-sm">
+          <a href="mailto:{{#if email}}<a href="mailto:{{email}}" class="text-blue-600 underline">{{email}}</a>{{/if}}" class="text-blue-600 underline"
+            >{{#if email}}<a href="mailto:{{email}}" class="text-blue-600 underline">{{email}}</a>{{/if}}</a
+          >
+        </p>
+        <hr class="border-gray-300 mt-4" />
+      </header>
+
+      <!-- Objetivo -->
+      <section class="space-y-2">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Objetivo
+        </h2>
+        {{#if objetivo}}<p>{{objetivo}}</p>{{/if}}
+      </section>
+
+      <!-- Qualificações e Habilidades -->
+      {{#if habilidades.length}}
+      <section class="space-y-2">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Qualificações e Habilidades
+        </h2>
+        <ul class="list-disc list-inside">
+          {{#each habilidades}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
+
+      <!-- Formação Escolar -->
+      <section class="space-y-2">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Formação Escolar
+        </h2>
+        <p>
+          {{formacao.nivel}} – {{formacao.instituicao}} – Conclusão
+          {{formacao.ano}}
+        </p>
+      </section>
+
+      <!-- Experiência Profissional -->
+      {{#if experiencias.length}}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Experiência Profissional
+        </h2>
+        {{#each experiencias}}
+        <div class="space-y-1">
+          <p class="font-semibold">{{empresa}}</p>
+          <p class="text-sm">{{local}}</p>
+          <p class="text-sm">Período: {{periodo}}</p>
+          <p class="text-sm"><strong>Cargo:</strong> {{cargo}}</p>
+          <p class="text-sm"><strong>Atribuições:</strong> {{descricao}}</p>
+        </div>
+        {{/each}}
+      </section>
+    {{/if}}
+
+      <!-- Qualificação Profissional (Cursos) -->
+      {{#if cursos.length}}
+      <section class="space-y-6">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Qualificação Profissional
+        </h2>
+        {{#each cursos}}
+        <div class="space-y-1">
+          <p class="font-semibold">Curso: {{titulo}}</p>
+          <p class="text-sm">Conteúdo: {{conteudo}}</p>
+          <p class="text-sm">Carga Horária: {{cargaHoraria}}</p>
+          <p class="text-sm">Instituição: {{instituicao}}</p>
+          <p class="text-sm">Conclusão: {{conclusao}}</p>
+        </div>
+        {{/each}}
+      </section>
+    {{/if}}
+
+      <!-- Informações Adicionais -->
+      {{#if adicionais.length}}
+      <section class="space-y-2">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Informações Adicionais
+        </h2>
+        <ul class="list-disc list-inside">
+          {{#each adicionais}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
+
+      <!-- Idioma -->
+      {{#if idioma}}
+      <section class="space-y-2">
+        <h2 class="text-2xl font-semibold border-b-2 border-gray-200 pb-1">
+          Idioma
+        </h2>
+        <p>{{idioma}}{{#if nivelIdioma}} – {{nivelIdioma}}{{/if}}</p>
+      </section>
+    {{/if}}
+
+      <!-- Rodapé -->
+      <footer class="text-right text-sm text-gray-600">
+        {{#if cidade}}{{cidade}}{{/if}}/{{ano}}
+      </footer>
+    </div>
+  </body>
+</html>
